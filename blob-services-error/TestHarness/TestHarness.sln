@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestHarness", "TestHarness\TestHarness.csproj", "{F9DD9D49-CED3-4286-B274-3E2E608C3FE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzBicepRunner", "..\..\..\BicepFlex\src\AzBicepRunner\AzBicepRunner.csproj", "{67257810-2FB3-4727-8CAB-DED3FDCBE98A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BicepRunner", "..\..\..\BicepFlex\src\BicepRunner\BicepRunner.csproj", "{DB805003-449C-45D6-A686-27657BC761BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9DD9D49-CED3-4286-B274-3E2E608C3FE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DD9D49-CED3-4286-B274-3E2E608C3FE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DD9D49-CED3-4286-B274-3E2E608C3FE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DD9D49-CED3-4286-B274-3E2E608C3FE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67257810-2FB3-4727-8CAB-DED3FDCBE98A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67257810-2FB3-4727-8CAB-DED3FDCBE98A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67257810-2FB3-4727-8CAB-DED3FDCBE98A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67257810-2FB3-4727-8CAB-DED3FDCBE98A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB805003-449C-45D6-A686-27657BC761BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB805003-449C-45D6-A686-27657BC761BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB805003-449C-45D6-A686-27657BC761BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB805003-449C-45D6-A686-27657BC761BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

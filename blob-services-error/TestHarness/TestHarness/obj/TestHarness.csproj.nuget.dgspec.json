@@ -1,0 +1,204 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\code\\github\\graemefoster\\bicep-tests\\blob-services-error\\TestHarness\\TestHarness\\TestHarness.csproj": {}
+  },
+  "projects": {
+    "C:\\code\\github\\graemefoster\\bicep-tests\\blob-services-error\\TestHarness\\TestHarness\\TestHarness.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\github\\graemefoster\\bicep-tests\\blob-services-error\\TestHarness\\TestHarness\\TestHarness.csproj",
+        "projectName": "TestHarness",
+        "projectPath": "C:\\code\\github\\graemefoster\\bicep-tests\\blob-services-error\\TestHarness\\TestHarness\\TestHarness.csproj",
+        "packagesPath": "C:\\Users\\graemefoster\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\github\\graemefoster\\bicep-tests\\blob-services-error\\TestHarness\\TestHarness\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\graemefoster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\AzBicepRunner.csproj": {
+                "projectPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\AzBicepRunner.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\AzBicepRunner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\AzBicepRunner.csproj",
+        "projectName": "AzBicepRunner",
+        "projectPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\AzBicepRunner.csproj",
+        "packagesPath": "C:\\Users\\graemefoster\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\AzBicepRunner\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\graemefoster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\BicepRunner.csproj": {
+                "projectPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\BicepRunner.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Azure.Identity": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "Azure.ResourceManager.Resources": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\BicepRunner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\BicepRunner.csproj",
+        "projectName": "BicepRunner",
+        "projectPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\BicepRunner.csproj",
+        "packagesPath": "C:\\Users\\graemefoster\\.nuget\\packages\\",
+        "outputPath": "C:\\code\\github\\graemefoster\\BicepFlex\\src\\BicepRunner\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\graemefoster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
