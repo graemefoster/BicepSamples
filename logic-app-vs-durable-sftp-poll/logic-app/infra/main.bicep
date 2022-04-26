@@ -1,9 +1,87 @@
 targetScope = 'resourceGroup'
 
-param name string = 'logicapptest'
+param name string = 'test'
 param location string = resourceGroup().location
 
 var uniqueName = '${name}${substring(uniqueString(resourceGroup().id), 0, 5)}'
+
+resource sftp 'Microsoft.Storage/storageAccounts@2021-08-01' = {
+  name: '${uniqueName}sftp'
+  location: location
+  kind: 'StorageV2'
+  sku: {
+    name: 'Standard_LRS'
+  }
+  properties: {
+    supportsHttpsTrafficOnly: true
+    accessTier: 'Hot'
+    isLocalUserEnabled: true
+    isHnsEnabled: true //needed for sftp
+    isSftpEnabled: true //currently in preview
+  }
+}
+
+resource blobServices 'Microsoft.Storage/storageAccounts/blobServices@2021-08-01' = {
+  name: 'default'
+  parent: sftp
+}
+
+resource incoming 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: 'incoming'
+  parent: blobServices
+}
+
+resource processing 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: 'processing'
+  parent: blobServices
+}
+
+resource processed 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: 'processed'
+  parent: blobServices
+}
+
+resource failed 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: 'failed'
+  parent: blobServices
+}
+
+resource fred 'Microsoft.Storage/storageAccounts/localUsers@2021-08-01' = {
+  name: 'fred'
+  parent: sftp
+  properties: {
+    permissionScopes: [
+      {
+        permissions: 'rwdlc'
+        resourceName: incoming.name
+        service: 'blob'
+      }
+      {
+        permissions: 'rwdlc'
+        resourceName: processing.name
+        service: 'blob'
+      }
+      {
+        permissions: 'rwdlc'
+        resourceName: processed.name
+        service: 'blob'
+      }
+      {
+        permissions: 'rwdlc'
+        resourceName: failed.name
+        service: 'blob'
+      }
+    ]
+    hasSshKey: true
+    hasSshPassword: false
+    sshAuthorizedKeys: [
+      {
+        description: 'Generate in sub-folder ./keys with name fred'
+        key: loadTextContent('./keys/fred.pub', 'utf-8')
+      }
+    ]
+  }
+}
 
 resource logaw 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
   name: '${uniqueName}-logaw'
@@ -15,118 +93,13 @@ resource logaw 'Microsoft.OperationalInsights/workspaces@2021-12-01-preview' = {
   }
 }
 
-resource logicPlan 'Microsoft.Web/serverfarms@2021-02-01' = {
-  name: '${uniqueName}-logicapp-plan'
-  location: location
-  sku: {
-    tier: 'WorkflowStandard'
-    name: 'WS1'
-  }
-  properties: {
-    targetWorkerCount: 1
-    maximumElasticWorkerCount: 2
-    elasticScaleEnabled: true
-    isSpot: false
-    zoneRedundant: true
+module logicApp './logic-app.bicep' = {
+  name: 'logicApp'
+  params: {
+    lawid: logaw.id
+    uniqueName: uniqueName
+    location: location
+    sshUsername: fred.name
   }
 }
 
-resource appi 'Microsoft.Insights/components@2020-02-02' = {
-  name: '${uniqueName}-appi'
-  location: location
-  kind: 'web'
-  properties: {
-    Application_Type: 'web'
-    Flow_Type: 'Bluefield'
-    publicNetworkAccessForIngestion: 'Enabled'
-    publicNetworkAccessForQuery: 'Enabled'
-    Request_Source: 'rest'
-    RetentionInDays: 30
-    WorkspaceResourceId: logaw.id
-  }
-}
-
-resource storage 'Microsoft.Storage/storageAccounts@2019-06-01' = {
-  name: '${uniqueName}logicstg'
-  location: location
-  kind: 'StorageV2'
-  sku: {
-    name: 'Standard_GRS'
-  }
-  properties: {
-    supportsHttpsTrafficOnly: true
-    minimumTlsVersion: 'TLS1_2'
-  }
-}
-
-// App service containing the workflow runtime
-resource site 'Microsoft.Web/sites@2021-02-01' = {
-  name: '${uniqueName}-logicapp'
-  location: location
-  kind: 'functionapp,workflowapp'
-  identity: {
-    type: 'SystemAssigned'
-  }
-  properties: {
-    httpsOnly: true
-    siteConfig: {
-      appSettings: [
-        {
-          name: 'FUNCTIONS_EXTENSION_VERSION'
-          value: '~3'
-        }
-        {
-          name: 'FUNCTIONS_WORKER_RUNTIME'
-          value: 'node'
-        }
-        {
-          name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~12'
-        }
-        {
-          name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};AccountKey=${listKeys(storage.id, '2019-06-01').keys[0].value};EndpointSuffix=core.windows.net'
-        }
-        {
-          name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};AccountKey=${listKeys(storage.id, '2019-06-01').keys[0].value};EndpointSuffix=core.windows.net'
-        }
-        {
-          name: 'WEBSITE_CONTENTSHARE'
-          value: 'app-${toLower(name)}-logicservice'
-        }
-        {
-          name: 'AzureFunctionsJobHost__extensionBundle__id'
-          value: 'Microsoft.Azure.Functions.ExtensionBundle.Workflows'
-        }
-        {
-          name: 'AzureFunctionsJobHost__extensionBundle__version'
-          value: '[1.*, 2.0.0)'
-        }
-        {
-          name: 'APP_KIND'
-          value: 'workflowApp'
-        }
-        {
-          name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
-          value: appi.properties.InstrumentationKey
-        }
-        {
-          name: 'ApplicationInsightsAgent_EXTENSION_VERSION'
-          value: '~2'
-        }
-        {
-          name: 'APPLICATIONINSIGHTS_CONNECTION_STRING'
-          value: appi.properties.ConnectionString
-        }
-      ]
-      use32BitWorkerProcess: true
-    }
-    serverFarmId: logicPlan.id
-    clientAffinityEnabled: false
-  }
-}
-
-// Return the Logic App service name and farm name
-output app string = site.name
-output plan string = logicPlan.name
